@@ -26,7 +26,7 @@ router.get("/dashboard", islogged,wrapAysnc(async (req, res) => {
     const host = await User.findById(req.user._id);
   // Fetch listings owned by this host
   const myListings = await Listing.find({ owner: req.user._id });
-  res.render("host/Dashboard.ejs", { myListings, host});
+  res.render("host/dashboard.ejs", { myListings, host});
 }));
 
 module.exports = router;

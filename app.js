@@ -81,8 +81,6 @@ const sessionOption={
     }
 };
 
-
-
 app.use(cookierParser());
 app.use(session(sessionOption));
 app.use(flash());
