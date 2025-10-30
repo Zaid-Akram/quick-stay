@@ -1,0 +1,51 @@
+<% layout("/layout/biolerPlate") %>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+           <form method="post" action="/listings/<%=aL.id%>?_method=PUT"
+             novalidate class="needs-validation" enctype="multipart/form-data" >
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="listing[title]" value="<%=aL.title%>" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="Description" class="form-label" >Description</label>
+                <input type="text" name="listing[description]" value="<%=aL.description%>" class="form-control">
+            </div>
+            <div class="mb-3">
+                <h5>Original listing image</h5>
+                <img src="<%=originalImageUrl%>" alt="random" style="
+      width: 100px; 
+      height: 100px; 
+      object-fit: cover; 
+      border-radius: 5px; 
+      border: 1px solid #ccc;
+    ">
+            </div>
+            <div class="mb-3">
+                <label for="Image" class="form-label" >Upload New Image</label>
+                <input type="file" name="listing[image]" class="form-control">
+            </div>
+            <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="location" class="form-label" >Location</label>
+                <input type="text" name="listing[location]" value="<%=aL.location%>" class="form-control" required>
+                <div class="valid-feedback">title looks good!</div>
+            </div>
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label" >country</label>
+                <input type="text" name="listing[country]" value="<%=aL.country%>" class="form-control" required>
+            </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label" >Price</label>
+                <input type="text" name="listing[price]" value="<%=aL.price%>" class="form-control" required>
+                <div class="valid-feedback">you have to enetr numerical value</div>
+            </div>
+       
+        <button class="btn add-btn btn-dark">edit</button>
+    </form>
+    </div>
+    </div>
+</body>

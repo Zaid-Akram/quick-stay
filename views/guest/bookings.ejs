@@ -1,0 +1,33 @@
+
+<%layout("../views/layout/biolerPlate")%> 
+<div class="container mt-5">
+  <h2 class="mb-4">My Bookings</h2>
+
+  <% if (bookings.length === 0) { %>
+    <p>You have no bookings yet.</p>
+  <% } else { %>
+    <div class="row">
+      <% bookings.forEach(b => { %>
+        <div class="col-md-4 mb-3">
+          <div class="card shadow-sm p-3">
+            <h5><%= b.listing ? b.listing.title : "Deleted Listing" %></h5>
+            <p><strong>Check-in:</strong> <%= b.checkin.toDateString() %></p>
+            <p><strong>Check-out:</strong> <%= b.checkout.toDateString() %></p>
+            <p><strong>Total Price:</strong> ₹<%= b.totalPrice %></p>
+            <form
+              action="/guest/bookings/<%= b._id %>?_method=DELETE"
+              method="POST"
+              onsubmit="return confirm('Are you sure you want to cancel this booking?');"
+            >
+              <button type="submit" class="btn btn-danger btn-sm mt-2">
+                <i class="fa-solid fa-xmark me-1"></i> Cancel Booking
+              </button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+

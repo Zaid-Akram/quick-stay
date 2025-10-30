@@ -1,0 +1,31 @@
+
+<%- include("../includes/adminHeader.ejs")%>
+    <%-include("../includes/flash.ejs")%>
+<div class="container mt-4">
+  <h2 class="mb-4">All Reviews</h2>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Listing</th>
+        <th>Owner</th>
+        <th>Reviewer</th>
+        <th>Rating</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reviews.forEach((r, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= r.listing?.title || "N/A" %></td>
+          <td><%= r.listing?.owner?.username || "N/A" %></td>
+          <td><%= r.author?.username || "N/A" %></td>
+          <td><%= r.rating %> ⭐</td>
+          <td><%= r.comment || "—" %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,19 @@
+
+<%layout("../views/layout/biolerPlate")%> 
+<div class="container mt-5">
+  <h2 class="mb-4">My Reviews</h2>
+
+  <% if (reviews.length === 0) { %>
+    <p>You haven’t posted any reviews yet.</p>
+  <% } else { %>
+    <% reviews.forEach(r => { %>
+      <div class="card p-3 mb-3 shadow-sm">
+        <p><strong>Rating:</strong> ⭐ <%= r.rating %>/5</p>
+        <p><strong>Comment:</strong> <%= r.comment %></p>
+        <p class="text-muted"><%= r.createdAt.toDateString() %></p>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
+
+

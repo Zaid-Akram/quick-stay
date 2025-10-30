@@ -1,0 +1,31 @@
+<!-- oct 30 -->
+
+<%layout("../views/layout/biolerPlate")%> 
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-primary text-white text-center rounded-top-4">
+      <h3><i class="fa-solid fa-id-card me-2"></i> My Profile</h3>
+    </div>
+    <div class="card-body p-4">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <h5><i class="fa-solid fa-user me-2"></i> Username:</h5>
+          <p class="text-muted"><%= user.username %></p>
+        </div>
+        <div class="col-md-6">
+          <h5><i class="fa-solid fa-envelope me-2"></i> Email:</h5>
+          <p class="text-muted"><%= user.email %></p>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <h5><i class="fa-solid fa-user-tag me-2"></i> Role:</h5>
+          <p class="text-muted"><%= user.role %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

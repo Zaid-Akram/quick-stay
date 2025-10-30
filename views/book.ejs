@@ -1,0 +1,70 @@
+
+<% layout("/layout/biolerPlate") %>
+<body>
+    <form action="/listings/<%= aL.id %>/book" method="POST" class="col-md-6 offset-md-3">
+        <div class="mb-3">
+    <label for="guestName" class="form-label">Full name</label>
+    <input type="text" id="guestName" name="booking[name]" class="form-control" required>
+    <div class="invalid-feedback">Please enter your name.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="guestEmail" class="form-label">Email</label>
+    <input type="email" id="guestEmail" name="booking[email]" class="form-control" required>
+    <div class="invalid-feedback">Please enter a valid email.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="guestPhone" class="form-label">Mobile number</label>
+    <input type="tel" id="guestPhone" name="booking[phone]" class="form-control"
+     pattern="[0-9]{10}" maxlength="10"  required>
+    <div class="invalid-feedback">Please enter a 10-digit mobile number.</div>
+  </div>
+  <div class="mb-3">
+    <label for="checkin" class="form-label">Check-in Date</label>
+    <input type="date" id="checkin" name="booking[checkin]" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="checkout" class="form-label">Check-out Date</label>
+    <input type="date" id="checkout" name="booking[checkout]" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <div class="mb-3">
+  
+  <div class="invalid-feedback">Please select how many guests will stay.</div>
+</div>
+
+
+  <div class="mb-3">
+    <label class="form-label">Total Price (calculated)</label>
+    <input type="text" id="total" class="form-control" readonly>
+  </div>
+
+  <button type="submit" class="btn btn-success w-100">Confirm Booking</button>
+</form>
+
+</body>
+<script>
+  const pricePerNight = "<%= aL.price %>";
+  const checkin = document.getElementById("checkin");
+  const checkout = document.getElementById("checkout");
+  const total = document.getElementById("total");
+
+  function calculateTotal() {
+    if (checkin.value && checkout.value) {
+      const inDate = new Date(checkin.value);
+      const outDate = new Date(checkout.value);
+      const days = (outDate - inDate) / (1000 * 60 * 60 * 24);
+      if (days > 0) {
+        total.value = "₹" + (days * pricePerNight);
+      } else {
+        total.value = "Invalid dates";
+      }
+    }
+  }
+  checkin.addEventListener("change", calculateTotal);
+  checkout.addEventListener("change", calculateTotal);
+</script>
+

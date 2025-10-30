@@ -1,0 +1,101 @@
+<% layout("/layout/biolerPlate") %>
+
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3><%= aL.title%>:</h3>
+            <div class="card" >
+                <img src="<%=aL.image.url%>" class="card-img-top show-image" alt="listing details " style="height:  30rem;"> 
+            </div>
+            <p class="mt-3">
+              <b>Owner: </b><%=aL.owner.username %>
+            <p><b>Description:</b> <%=aL.description %></p>
+            <!-- <p><b>Image url:</b> <%=aL.image.url %></p> -->
+            <p><b>Location:</b> <%=aL.location %></p>
+            <p><b>Country:</b> <%=aL.country %></p>
+            <p><b>Price: </b><%=aL.price %></p>
+
+        <% if(currentUser && currentUser.username!=aL.owner){%>
+      <% if (isBooked) { %>
+        <span class="badge bg-danger">Currently Booked</span>
+      <% } else { %>
+        <span class=" btn btn-dark add-btn">Available</span>
+        <a href="/listings/<%= aL._id %>/book" class="btn btn-dark add-btn">Book Now</a>
+      <% } %>
+<% } %>
+         </div>
+    </div>
+
+    <div class="row mt-3 mb-3" >
+        <div class="col-6 offset-2">
+             <% if(currentUser && currentUser._id.equals(aL.owner._id)) {%>
+             <a href="/listings/<%=aL.id%>/edit" class="btn btn-primary">Edit This Listing</a>
+             <a href="/listings/<%=aL.id%>/del" class="btn btn-primary">Delete This Listing</a>
+              <% } %>
+              
+        </div>
+    </div>
+   
+    <form method="POST" action="/listings/<%=aL.id%>/reviews" novalidate class="needs-validation">
+        <div class="col-8 offset-2">
+        
+        <% if(currentUser) {%>
+
+           <% if(currentUser && currentUser.role==="guest") {%>
+            <h3>leave a review</h3>
+  <label for="rating" class="form-label">Rating</label>      
+<fieldset class="starability-slot">
+  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+  <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+</fieldset>
+  
+        <label for="comment"  class="form-label">Comment</label>
+        <textarea name="review[comment]" id="" rows="3" cols="6" class="form-control" required></textarea>
+            <div class="invalid-feedback">please add some comment for review</div>
+        
+        <br>
+        <button class="btn btn-dark add-btn">submit</button>
+        </div>
+      <% } %>
+        <% } %>
+      </form>
+     
+   <br>
+ 
+  <div class="row mt-3">
+    <div class="col-8 offset-2">
+      <p><b>All Reviews</b></p>
+      <div class="row">
+        <% for(review of aL.reviews) { %>
+          <div class="col-md-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Author: @<%= review.author.username %></h5>
+                <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                <p class="card-text"><%= review.comment %></p>
+
+                <form class="mb-2" method="POST" 
+                  action="/listings/<%= aL._id %>/reviews/<%= review._id %>?_method=DELETE">
+                  <button class="btn btn-sm btn-dark">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  
+
+    
+
+

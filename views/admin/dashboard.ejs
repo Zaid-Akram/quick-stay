@@ -1,0 +1,97 @@
+ <%- include("../includes/adminHeader.ejs")%>
+    <%-include("../includes/flash.ejs")%>
+<div class="container mt-5">
+  <h1 class="text-center mb-5">Admin Dashboard</h1>
+
+  <!-- Stats Row -->
+  <div class="row text-center mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card shadow p-3">
+        <h3><%= totalUsers %></h3>
+        <p>Total Users</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card shadow p-3">
+        <h3><%= totalHosts %></h3>
+        <p>Total Hosts</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card shadow p-3">
+        <h3><%= totalGuests %></h3>
+        <p>Total Guests</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card shadow p-3">
+        <h3><%= totalListings %></h3>
+        <p>Total Listings</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card shadow p-3">
+        <h3><%= totalBookings %></h3>
+        <p>Total Bookings</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card shadow p-3">
+        <h3><%= totalReviews %></h3>
+        <p>Total Reviews</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Listings -->
+  <h4 class="mt-5">Recent Listings</h4>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Host</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recentListings.forEach(listing => { %>
+        <tr>
+          <td><%= listing.title %></td>
+          <td><%= listing.location %></td>
+          <td><%= listing.owner ? listing.owner.username : "N/A" %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <!-- Recent Bookings -->
+  <h4 class="mt-5">Recent Bookings</h4>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Listing</th>
+        <th>Guest Name</th>
+        <th>Email</th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recentBookings.forEach(b => { %>
+        <tr>
+          <td><%= b.listing ? b.listing.title : "N/A" %></td>
+          <td><%= b.name %></td>
+          <td><%= b.email %></td>
+          <td><%= b.checkin.toDateString() %></td>
+          <td><%= b.checkout.toDateString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+ <%- include("../includes/footer.ejs")%>
+    
