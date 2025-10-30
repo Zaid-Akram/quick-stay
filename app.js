@@ -108,12 +108,17 @@ async function main(){
 // middleware always reamin at bottom of the code
 // Root route
 
+
 app.use((req, res, next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
     res.locals.currentUser=req.user;
     next();
 })
+
+app.get("/",(req,res)=>{
+    res.render("index.ejs");
+});
 
 app.use("/",user)
 app.use("/listings", listings);
@@ -129,6 +134,7 @@ app.use((err,req,res,next)=>{
     res.render("error.ejs",{message});
     //res.status(status).send(message);
 });
+
 app.listen(3000,()=>{
     console.log("server is listening on port");
 });
