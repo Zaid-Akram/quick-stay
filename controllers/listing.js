@@ -27,7 +27,7 @@ module.exports.createListing=async(req,res,next)=>{
     newListing.image={filename,url};
     await newListing.save();
     req.flash("succes","new listing added")
-    res.redirect("/listings");
+    res.redirect("/host/dashboard");
 };
 
 module.exports.renderNewForm=async(req,res)=>{
